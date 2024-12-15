@@ -24,31 +24,16 @@ def app(df, X, y):
     # Take feature input from the user
     # Add a subheader
     st.subheader("Health Biometric values:")
-
     # Take input of features from the user.
-    rad = st.slider("Radius", float(df["radius_mean"].min()), float(df["radius_mean"].max()))
-    tex = st.slider("Texture", float(df["texture_mean"].min()), float(df["texture_mean"].max()))
-    per = st.slider("Perimeter", float(df["perimeter_mean"].min()), float(df["perimeter_mean"].max()))
-    are = st.slider("Area", float(df["area_mean"].min()), float(df["area_mean"].max()))
-    smo = st.slider("Smoothness", float(df["smoothness_mean"].min()), float(df["smoothness_mean"].max()))
-    com = st.slider("Compactness", float(df["compactness_mean"].min()), float(df["compactness_mean"].max()))
-    con = st.slider("Concavity", float(df["compactness_mean"].min()), float(df["compactness_mean"].max()))
-    sym = st.slider("Symmetry", float(df["symmetry_mean"].min()), float(df["symmetry_mean"].max()))
-    fad = st.slider("Fractal Dimension", float(df["fractal_dimension_mean"].min()), float(df["fractal_dimension_mean"].max()))
-       
-
-
-    rad = st.slider("Age", float(df["radius_mean"].min()), float(df["radius_mean"].max()))
-    tex = st.slider("Texture", float(df["texture_mean"].min()), float(df["texture_mean"].max()))
-    per = st.slider("Perimeter", float(df["perimeter_mean"].min()), float(df["perimeter_mean"].max()))
-    are = st.slider("Area", float(df["area_mean"].min()), float(df["area_mean"].max()))
-    smo = st.slider("Smoothness", float(df["smoothness_mean"].min()), float(df["smoothness_mean"].max()))
-    com = st.slider("Compactness", float(df["compactness_mean"].min()), float(df["compactness_mean"].max()))
-    con = st.slider("Concavity", float(df["compactness_mean"].min()), float(df["compactness_mean"].max()))
-    sym = st.slider("Symmetry", float(df["symmetry_mean"].min()), float(df["symmetry_mean"].max()))
-    fad = st.slider("Fractal Dimension", float(df["fractal_dimension_mean"].min()), float(df["fractal_dimension_mean"].max()))
-       
-
+    # age = st.slider("Age", float(df["age_mean"].min()), float(df["age_mean"].max()))
+    # anaemia = st.slider("Anaemia", float(df["anaemia_mean"].min()), float(df["anaemia_mean"].max()))
+    # cpk = st.slider("CPK", float(df["cpk_mean"].min()), float(df["cpk_mean"].max()))
+    # diabetes = st.slider("Diabetes", float(df["diabetes_mean"].min()), float(df["diabetes_mean"].max()))
+    # ef = st.slider("EF", float(df["ef_mean"].min()), float(df["ef_mean"].max()))
+    # high_blood_pressure = st.slider("High_blood_pressure", float(df["high_blood_pressure_mean"].min()), float(df["high_blood_pressure_mean"].max()))
+    # platelets = st.slider("Platelets", float(df["platelets_mean"].min()), float(df["platelets_mean"].max()))
+    # serum_creatinine = st.slider("Serum_creatinine", float(df["serum_creatinine_mean"].min()), float(df["serum_creatinine_mean"].max()))
+    # serum_sodium = st.slider("Serum_sodium", float(df["serum_sodium_mean"].min()), float(df["serum_sodium_mean"].max()))
 
 
     # Age: Slider for numerical value
@@ -70,7 +55,8 @@ def app(df, X, y):
     ### Creatinine Phosphokinase (CPK)
     Creatinine Phosphokinase (CPK) is an enzyme found in the heart, brain, and skeletal muscles. Elevated levels can indicate damage to these tissues.
     """)
-    cpk = st.slider("Creatinine Phosphokinase", 0, 6000, 100)  
+    # cpk = st.slider("Creatinine Phosphokinase", 0, 6000, 100)  
+    cpk = st.slider("Creatinine Phosphokinase", 0, 6000, 8000)  
 
     # Diabetes: Checkbox for binary yes/no (0 or 1)
     st.write("""
@@ -98,21 +84,21 @@ def app(df, X, y):
     ### Platelets
     Platelets are small blood cells that help prevent bleeding by forming clots. The normal platelet count is typically between 150,000 and 450,000 per microliter of blood.
     """)
-    platelets = st.slider("Platelets", 0, 800000, 200000)  # Example range
+    platelets = st.slider("Platelets", 0, 850000, 200000)  # Example range
 
     # Serum Creatinine: Slider for numerical value
     st.write("""
     ### Serum Creatinine
     Serum Creatinine is a waste product filtered out of the blood by the kidneys. High levels can indicate poor kidney function.
     """)
-    serum_creatinine = st.slider("Serum Creatinine", 0.5, 10.0, 1.0)  # Example range
+    serum_creatinine = st.slider("Serum Creatinine", 0.5, 0.0, 10.0)  # Example range
 
     # Serum Sodium: Slider for numerical value
     st.write("""
     ### Serum Sodium
     Serum Sodium levels indicate the amount of sodium in the blood, which is important for maintaining fluid balance and proper muscle and nerve function.
     """)
-    serum_sodium = st.slider("Serum Sodium", 100, 160, 140)  # Example range
+    serum_sodium = st.slider("Serum Sodium", 0, 200)  # Example range
 
     # Sex: Selectbox for Male/Female
     st.write("""
@@ -133,25 +119,26 @@ def app(df, X, y):
     ### Follow-up Time in Hospital
     This feature indicates the patient's follow-up time in hospital after a cardiac event. The value is given in days.
     """)
-    follow_up_time = st.slider("Follow-up Time in Hospital (days)", 1, 1000, 200)  # Example range
+    # follow_up_time = st.slider("Follow-up Time in Hospital (days)", 1, 1000, 200)  # Example range
+    follow_up_time = st.slider("Follow-up Time in Hospital (days)", 1, 290)  # Example range
 
-    # Display all the inputs (for debugging or further use)
-    st.write(f"**Age**: {age}")
-    st.write(f"**Anaemia**: {anaemia}")
-    st.write(f"**Creatinine Phosphokinase**: {cpk}")
-    st.write(f"**Diabetes**: {diabetes}")
-    st.write(f"**Ejection Fraction (EF)**: {ef}")
-    st.write(f"**High Blood Pressure**: {high_blood_pressure}")
-    st.write(f"**Platelets**: {platelets}")
-    st.write(f"**Serum Creatinine**: {serum_creatinine}")
-    st.write(f"**Serum Sodium**: {serum_sodium}")
-    st.write(f"**Sex**: {sex}")
-    st.write(f"**Smoking**: {smoking}")
-    st.write(f"**Follow-up Time**: {follow_up_time} days")
+    # # Display all the inputs (for debugging or further use)
+    # st.write(f"**Age**: {age}")
+    # st.write(f"**Anaemia**: {anaemia}")
+    # st.write(f"**Creatinine Phosphokinase**: {cpk}")
+    # st.write(f"**Diabetes**: {diabetes}")
+    # st.write(f"**Ejection Fraction (EF)**: {ef}")
+    # st.write(f"**High Blood Pressure**: {high_blood_pressure}")
+    # st.write(f"**Platelets**: {platelets}")
+    # st.write(f"**Serum Creatinine**: {serum_creatinine}")
+    # st.write(f"**Serum Sodium**: {serum_sodium}")
+    # st.write(f"**Sex**: {sex}")
+    # st.write(f"**Smoking**: {smoking}")
+    # st.write(f"**Follow-up Time**: {follow_up_time} days")
 
 
     # Create a list to store all the features
-    features = [rad,tex,per,are,smo,com,con,sym,fad]
+    features = [age,anaemia,cpk,diabetes,ef,high_blood_pressure,platelets,serum_creatinine,serum_sodium,sex,smoking,follow_up_time]
 
     # Create a button to predict
     if st.button("Predict!"):

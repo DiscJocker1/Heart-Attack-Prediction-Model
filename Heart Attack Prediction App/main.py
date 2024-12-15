@@ -3,18 +3,20 @@
 # Importing the necessary Python modules.
 import streamlit as st
 
+
+
+# Configure the app
+st.set_page_config(
+    page_title = 'Heart Attack Prediction',
+    layout = 'wide',
+    initial_sidebar_state = 'auto'
+)
+
 # Import necessary functions from web_functions
 from web_functions import load_data
 
 # Import pages
 from Tabs import home, data, predict, visualise, about
-
-# Configure the app
-st.set_page_config(
-    page_title = 'Breast Cancer Detection',
-    layout = 'wide',
-    initial_sidebar_state = 'auto'
-)
 
 # Dictionary for pages
 Tabs = {

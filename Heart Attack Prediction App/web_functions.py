@@ -6,6 +6,15 @@ import pandas as pd
 # from sklearn.tree import DecisionTreeClassifier
 import streamlit as st
 
+# from pandas import Series, DataFrame,read_csv
+# from sklearn.utils import shuffle
+# import sklearn as sklearn
+# import matplotlib.pyplot as plt
+# from sklearn import tree
+# from sklearn.model_selection import train_test_split
+# from sklearn.tree import DecisionTreeRegressor
+# from sklearn import metrics, svm
+# from sklearn.model_selection import train_test_split
 
 @st.cache()
 def load_data():
@@ -17,9 +26,10 @@ def load_data():
     # Rename the column names in the DataFrame.
     
     # Perform feature and target split
-    X = df[['radius_mean','texture_mean','perimeter_mean','area_mean','smoothness_mean','compactness_mean','concavity_mean','symmetry_mean','fractal_dimension_mean']]
-    y = df['diagnosis']
-
+    # X = df[['age_mean','anaemia_mean','cpk_mean','diabetes_mean','ef_mean','high_blood_pressure_mean','platelets_mean','serum_creatinine_mean','serum_sodium_mean','sex_mean', 'smoking_mean', 'follow_up_time_mean']]
+    # y = df['diagnosis']
+    X = df
+    y = df
     return df, X, y
 
 @st.cache()
