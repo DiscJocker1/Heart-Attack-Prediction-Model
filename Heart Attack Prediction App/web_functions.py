@@ -51,11 +51,20 @@ def train_model(X, y):
     # # Return the values
     # return model, score
     pass
-
+import pickle
+import sklearn
 def predict(X, y, features):
-    # Get model and model score
-    model, score = train_model(X, y)
-    # Predict the value
-    prediction = model.predict(np.array(features).reshape(1, -1))
+    #load model
+    model = pickle.load(open("./model.pkl","rb"))
 
-    return prediction, score
+    #preprocess data
+    features[9] = 1 if features[9]=="Male" else 0
+    # do prediction
+    prediction = model.predict_proba(np.array(features).reshape(1, -1))
+    # get outcome
+    outcome = np.argmax(prediction[0])
+    # return outcome and probability
+    return outcome, prediction[0][outcome]
+
+    # return prediction, score
+    # return 1, 0.5

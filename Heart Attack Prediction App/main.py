@@ -45,3 +45,7 @@ elif (page == "Data Info"):
     Tabs[page].app(df)
 else:
     Tabs[page].app()
+
+#DJKhalid@Khalids-Macbook-Pro Heart-Attack-Prediction-Model % cd Heart\ Attack\ Prediction\ App 
+#DJKhalid@Khalids-Macbook-Pro Heart Attack Prediction App % source venv/bin/activate         
+#(venv) DJKhalid@Khalids-Macbook-Pro Heart Attack Prediction App % streamlit run main.py

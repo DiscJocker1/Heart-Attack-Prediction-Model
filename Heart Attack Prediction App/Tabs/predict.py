@@ -155,3 +155,7 @@ def app(df, X, y):
 
         # Print teh score of the model 
         st.write("The model has an accuracy of ", round((score*100)),"%")
+
+
+#Source venv/bin/activate
+#
