@@ -1,4 +1,4 @@
-"""This modules contains data about home page"""
+"""This modules contains data about my project"""
 
 # Import necessary modules
 import streamlit as st
@@ -7,7 +7,7 @@ def app():
     """This function create the home page"""
     
     # Add title to the home page
-    st.title("Heart Attack Prediction Model")
+    st.title("My Prediction Model")
 
     # Add image to the home page
     st.image("./images/home.jpeg")
