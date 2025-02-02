@@ -20,5 +20,3 @@ def app():
     
         </p>
     """, unsafe_allow_html=True)
-
-    import streamlit as st
