@@ -22,8 +22,10 @@ from Tabs import home, data, predict, visualise, about
 Tabs = {
     "Home": home,
     "About": about,
+    "Background": background
     "Data Info": data,
     "Prediction": predict,
+    "MyHealthConsultant": MyHealthConsultant
     "Visualisation": visualise
     
 }
