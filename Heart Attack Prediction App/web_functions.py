@@ -1,70 +1,68 @@
-"""This module contains necessary function needed"""
-
-# Import necessary modules
 import numpy as np
 import pandas as pd
-# from sklearn.tree import DecisionTreeClassifier
-import streamlit as st
+import pickle
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
 
-# from pandas import Series, DataFrame,read_csv
-# from sklearn.utils import shuffle
-# import sklearn as sklearn
-# import matplotlib.pyplot as plt
-# from sklearn import tree
-# from sklearn.model_selection import train_test_split
-# from sklearn.tree import DecisionTreeRegressor
-# from sklearn import metrics, svm
-# from sklearn.model_selection import train_test_split
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, roc_auc_score, classification_report, f1_score
+import pandas as pd
+import numpy as np
 
-@st.cache()
+# # Load trained model
+# with open("model-2.pkl", "rb") as model_file:  # Make sure this matches your downloaded model
+#     model = pickle.load(model_file)
+
+# # Load saved scaler
+# with open("scaler.pkl", "rb") as scaler_file:
+#     scaler = pickle.load(scaler_file)
+
+# Define Attention Layer
+
+
+
 def load_data():
-    """This function returns the preprocessed data"""
-
-    # Load the Diabetes dataset into DataFrame.
-    df = pd.read_csv('CardiologyScienceFairDataset.csv')
-
-    # Rename the column names in the DataFrame.
     
-    # Perform feature and target split
-    # X = df[['age_mean','anaemia_mean','cpk_mean','diabetes_mean','ef_mean','high_blood_pressure_mean','platelets_mean','serum_creatinine_mean','serum_sodium_mean','sex_mean', 'smoking_mean', 'follow_up_time_mean']]
-    # y = df['diagnosis']
-    X = df
-    y = df
+    """Loads and preprocesses the dataset for the Streamlit app."""
+    # df = pd.read_csv("CardiologyScienceFairDataset.csv")
+    df = pd.read_csv("Medicaldataset.csv")
+
+    # Define X (features) and y (target)
+    # X = df.drop(columns=["DEATH_EVENT"])
+    # y = df["DEATH_EVENT"]
+
+    X = df.drop(columns=["Result"])
+    y = df["Result"]
+
     return df, X, y
 
-@st.cache()
 def train_model(X, y):
-    """This function trains the model and return the model and model score"""
-    # Create the model
-    # model = DecisionTreeClassifier(
-    #         ccp_alpha=0.0, class_weight=None, criterion='entropy',
-    #         max_depth=4, max_features=None, max_leaf_nodes=None,
-    #         min_impurity_decrease=0.0, min_samples_leaf=1, 
-    #         min_samples_split=2, min_weight_fraction_leaf=0.0,
-    #         random_state=42, splitter='best'
-    #     )
-    # # Fit the data on model
-    # model.fit(X, y)
-    # # Get the model score
-    # score = model.score(X, y)
+    """Trains a new model and returns it along with accuracy score."""
+    # Split data into training and test sets
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    # # Return the values
-    # return model, score
-    pass
-import pickle
-import sklearn
-def predict(X, y, features):
-    #load model
-    model = pickle.load(open("./model.pkl","rb"))
+    # Train a Random Forest model
+    rf = RandomForestClassifier(n_estimators=300, max_depth=20, min_samples_split=5, min_samples_leaf=1, random_state=42)  # Use the same best params
+    rf.fit(X_train, y_train)
 
-    #preprocess data
-    features[9] = 1 if features[9]=="Male" else 0
-    # do prediction
-    prediction = model.predict_proba(np.array(features).reshape(1, -1))
-    # get outcome
-    outcome = np.argmax(prediction[0])
-    # return outcome and probability
-    return outcome, prediction[0][outcome]
+    # Get accuracy score
+    accuracy = accuracy_score(y_test, rf.predict(X_test))
 
-    # return prediction, score
-    # return 1, 0.5
+    return rf, accuracy
+
+def predict(features):
+    """Predicts heart attack risk based on input features"""
+
+    # Scale the input features
+    features_scaled = scaler.transform(np.array(features).reshape(1, -1))
+
+    # Make prediction
+    prediction = model.predict(features_scaled)[0]
+    confidence = model.predict_proba(features_scaled)[0][prediction]
+
+    return prediction, confidence

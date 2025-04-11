@@ -45,4 +45,7 @@ def app(df):
             col = st.selectbox("Column Name", list(df.columns))
             st.dataframe(df[col])
 
-    
+    st.image("Age Distribution by Result.png")
+    st.image("Age Distribution.png")
+    st.image("Gender Distribution.png")
+    st.image("Outcome Distribution.png")
